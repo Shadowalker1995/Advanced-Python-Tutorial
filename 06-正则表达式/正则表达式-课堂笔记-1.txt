@@ -1,0 +1,428 @@
+In [1]: import re
+
+In [2]: # re.match(正则表达式, 需要处理的字符串)
+
+In [3]: re.match(r"hello", "hello world")
+Out[3]: <_sre.SRE_Match object; span=(0, 5), match='hello'>
+
+In [4]: re.match(r"hello", "Hello world")
+
+In [5]: re.match(r"[hH]ello", "Hello world")
+Out[5]: <_sre.SRE_Match object; span=(0, 5), match='Hello'>
+
+In [6]: re.match(r"[hH]ello", "hello world")
+Out[6]: <_sre.SRE_Match object; span=(0, 5), match='hello'>
+
+In [7]:
+
+In [7]:
+
+
+
+
+======================== [] \d ======================================
+
+
+In [7]: re.match(r"速度与激情1", "速度与激情1")
+Out[7]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情1'>
+
+In [8]: re.match(r"速度与激情1", "速度与激情2")
+
+In [9]: re.match(r"速度与激情\d", "速度与激情2")
+Out[9]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情2'>
+
+In [10]: re.match(r"速度与激情\d", "速度与激情3")
+Out[10]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情3'>
+
+In [11]: re.match(r"速度与激情\d", "速度与激情5")
+Out[11]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情5'>
+
+In [12]: ret = re.match(r"速度与激情\d", "速度与激情5")
+
+In [13]: ret.group()
+Out[13]: '速度与激情5'
+
+In [14]: ret = re.match(r"速度与激情\d", "速度与激情8")
+
+In [15]: ret.group()
+Out[15]: '速度与激情8'
+
+In [16]: ret = re.match(r"速度与激情\d", "速度与激情88")
+
+In [17]: ret.group()
+Out[17]: '速度与激情8'
+
+In [18]: ret = re.match(r"速度与激情\d", "速度与激情8")
+
+In [19]: ret.group()
+Out[19]: '速度与激情8'
+
+In [20]: ret = re.match(r"速度与激情\d", "速度与激情9")
+
+In [21]: ret.group()
+Out[21]: '速度与激情9'
+
+In [22]: ret = re.match(r"速度与激情[12345678]", "速度与激情1")
+
+In [23]: ret.group()
+Out[23]: '速度与激情1'
+
+In [24]: re.match(r"速度与激情[12345678]", "速度与激情1").group()
+Out[24]: '速度与激情1'
+
+In [25]: re.match(r"速度与激情[12345678]", "速度与激情2").group()
+Out[25]: '速度与激情2'
+
+In [26]: re.match(r"速度与激情[12345678]", "速度与激情3").group()
+Out[26]: '速度与激情3'
+
+In [27]: re.match(r"速度与激情[12345678]", "速度与激情8").group()
+Out[27]: '速度与激情8'
+
+In [28]: re.match(r"速度与激情[12345678]", "速度与激情9").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-28-ae66df7a641b> in <module>()
+----> 1 re.match(r"速度与激情[12345678]", "速度与激情9").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [29]: re.match(r"速度与激情[12345678]", "速度与激情9")
+
+In [30]: re.match(r"速度与激情[1-8]", "速度与激情3")
+Out[30]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情3'>
+
+In [31]: re.match(r"速度与激情[1-8]", "速度与激情5")
+Out[31]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情5'>
+
+In [32]: re.match(r"速度与激情[1-8]", "速度与激情1")
+Out[32]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情1'>
+
+In [33]: re.match(r"速度与激情[1-8]", "速度与激情8")
+Out[33]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情8'>
+
+In [34]: re.match(r"速度与激情[1-8]", "速度与激情0")
+
+In [35]: re.match(r"速度与激情[1-8]", "速度与激情9")
+
+In [36]: re.match(r"速度与激情[123678]", "速度与激情1")
+Out[36]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情1'>
+
+In [37]: re.match(r"速度与激情[123678]", "速度与激情2")
+Out[37]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情2'>
+
+In [38]: re.match(r"速度与激情[123678]", "速度与激情3")
+Out[38]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情3'>
+
+In [39]: re.match(r"速度与激情[123678]", "速度与激情6")
+Out[39]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情6'>
+
+In [40]: re.match(r"速度与激情[123678]", "速度与激情8")
+Out[40]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情8'>
+
+In [41]: re.match(r"速度与激情[123678]", "速度与激情4")
+
+In [42]: re.match(r"速度与激情[1-36-8]", "速度与激情1")
+Out[42]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情1'>
+
+In [43]: re.match(r"速度与激情[1-36-8]", "速度与激情2")
+Out[43]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情2'>
+
+In [44]: re.match(r"速度与激情[1-36-8]", "速度与激情3")
+Out[44]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情3'>
+
+
+
+
+
+
+=============== \s \S . \w \W =============
+
+In [50]: re.match(r"速度与激情[1-8abcd]", "速度与激情8")
+Out[50]: <_sre.SRE_Match object; span=(0, 6), match='速度与激情8'>
+
+In [51]: re.match(r"速度与激情[1-8abcd]", "速度与激情8").group()
+Out[51]: '速度与激情8'
+
+In [52]: re.match(r"速度与激情[1-8abcd]", "速度与激情a").group()
+Out[52]: '速度与激情a'
+
+In [53]: re.match(r"速度与激情[1-8abcd]", "速度与激情b").group()
+Out[53]: '速度与激情b'
+
+In [54]: re.match(r"速度与激情[1-8abcd]", "速度与激情d").group()
+Out[54]: '速度与激情d'
+
+In [55]: re.match(r"速度与激情[1-8abcd]", "速度与激情e").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-55-fe309e3c98ca> in <module>()
+----> 1 re.match(r"速度与激情[1-8abcd]", "速度与激情e").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [56]: re.match(r"速度与激情[1-8a-d]", "速度与激情e").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-56-56e19ffd6703> in <module>()
+----> 1 re.match(r"速度与激情[1-8a-d]", "速度与激情e").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [57]: re.match(r"速度与激情[1-8a-z]", "速度与激情e").group()
+Out[57]: '速度与激情e'
+
+In [58]: re.match(r"速度与激情[1-8a-zA-Z]", "速度与激情E").group()
+Out[58]: '速度与激情E'
+
+In [59]:
+
+In [59]:
+
+In [59]:
+
+In [59]:
+
+In [59]: re.match(r"速度与激情\w", "速度与激情E").group()
+Out[59]: '速度与激情E'
+
+In [60]: re.match(r"速度与激情\w", "速度与激情e").group()
+Out[60]: '速度与激情e'
+
+In [61]: re.match(r"速度与激情\w", "速度与激情4").group()
+Out[61]: '速度与激情4'
+
+In [62]: re.match(r"速度与激情\w", "速度与激情_").group()
+Out[62]: '速度与激情_'
+
+In [63]: re.match(r"速度与激情\w", "速度与激情=").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-63-35ec37099482> in <module>()
+----> 1 re.match(r"速度与激情\w", "速度与激情=").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [64]: re.match(r"速度与激情\w", "速度与激情！").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-64-f6a0b74b08e6> in <module>()
+----> 1 re.match(r"速度与激情\w", "速度与激情！").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [65]:
+
+In [65]:
+
+In [65]: re.match(r"速度与激情\w", "速度与激情哈").group()
+Out[65]: '速度与激情哈'
+
+In [66]:
+
+In [66]:
+
+In [66]: re.match(r"速度与激情 \d", "速度与激情 1").group()
+Out[66]: '速度与激情 1'
+
+In [67]: re.match(r"速度与激情\s\d", "速度与激情 1").group()
+Out[67]: '速度与激情 1'
+
+In [68]: re.match(r"速度与激情\s\d", "速度与激情\t1").group()
+Out[68]: '速度与激情\t1'
+
+In [69]:
+
+In [69]:
+
+In [69]:
+
+In [69]: re.match(r"速度与激情.", "速度与激情1").group()
+Out[69]: '速度与激情1'
+
+In [70]: re.match(r"速度与激情.", "速度与激情a").group()
+Out[70]: '速度与激情a'
+
+In [71]: re.match(r"速度与激情.", "速度与激情A").group()
+Out[71]: '速度与激情A'
+
+In [72]: re.match(r"速度与激情.", "速度与激情_").group()
+Out[72]: '速度与激情_'
+
+In [73]: re.match(r"速度与激情.", "速度与激情哈").group()
+Out[73]: '速度与激情哈'
+
+In [74]: re.match(r"速度与激情.", "速度与激情！").group()
+Out[74]: '速度与激情！'
+
+In [75]: re.match(r"速度与激情.", "速度与激情#").group()
+Out[75]: '速度与激情#'
+
+In [76]:
+
+
+
+============ {} ? + * ==============
+
+In [76]:
+
+In [76]: re.match(r"速度与激情\d\d", "速度与激情12").group()
+Out[76]: '速度与激情12'
+
+In [77]: re.match(r"速度与激情\d\d", "速度与激情1").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-77-e74f93d9022b> in <module>()
+----> 1 re.match(r"速度与激情\d\d", "速度与激情1").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [78]:
+
+In [78]: re.match(r"速度与激情\d{1,2}", "速度与激情1").group()
+Out[78]: '速度与激情1'
+
+In [79]: re.match(r"速度与激情\d{1,2}", "速度与激情2").group()
+Out[79]: '速度与激情2'
+
+In [80]: re.match(r"速度与激情\d{1,2}", "速度与激情12").group()
+Out[80]: '速度与激情12'
+
+In [81]: re.match(r"速度与激情\d{1,3}", "速度与激情12").group()
+Out[81]: '速度与激情12'
+
+In [82]: re.match(r"速度与激情\d{1,3}", "速度与激情123").group()
+Out[82]: '速度与激情123'
+
+In [83]: re.match(r"速度与激情\d{1,3}", "速度与激情1").group()
+Out[83]: '速度与激情1'
+
+In [84]: re.match(r"速度与激情\d{1,3}", "速度与激情12").group()
+Out[84]: '速度与激情12'
+
+In [85]:
+
+In [85]: re.match(r"\d{11}", "12345678901").group()
+Out[85]: '12345678901'
+
+In [86]: re.match(r"\d{11}", "1234567890").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-86-7e4ae3d2b49b> in <module>()
+----> 1 re.match(r"\d{11}", "1234567890").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [87]: re.match(r"\d{11}", "123456780").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-87-60e03298b721> in <module>()
+----> 1 re.match(r"\d{11}", "123456780").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [88]:
+
+In [88]: re.match(r"\d{11}", "123456A78901").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-88-03f3b1eecf93> in <module>()
+----> 1 re.match(r"\d{11}", "123456A78901").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
+
+In [89]:
+
+In [89]:
+
+In [89]: re.match(r"021-\d{8}", "021-12345678").group()
+Out[89]: '021-12345678'
+
+In [90]: re.match(r"021-?\d{8}", "02112345678").group()
+Out[90]: '02112345678'
+
+In [91]: re.match(r"021-?\d{8}", "021-12345678").group()
+Out[91]: '021-12345678'
+
+In [92]:
+
+In [92]:
+
+In [92]: re.match(r"\d{3}-?\d{8}", "021-12345678").group()
+Out[92]: '021-12345678'
+
+In [93]: re.match(r"\d{3,4}-?\d{8}", "021-12345678").group()
+Out[93]: '021-12345678'
+
+In [94]: re.match(r"\d{3,4}-?\d{8}", "0531-12345678").group()
+Out[94]: '0531-12345678'
+
+In [95]: re.match(r"\d{3,4}-?\d{8}", "0532-12345678").group()
+Out[95]: '0532-12345678'
+
+In [96]: re.match(r"\d{3,4}-?\d{7,8}", "0532-12345678").group()
+Out[96]: '0532-12345678'
+
+In [97]: re.match(r"\d{3,4}-?\d{7,8}", "0532-1234567").group()
+Out[97]: '0532-1234567'
+
+In [98]:
+
+In [98]: html_content = """fdsf
+    ...: kasdjfkjasdkfjkasdjfjahsdufhawufhausdhfuahsdf
+    ...: asdjfhjjasdhf
+    ...: asdfasd'fas
+    ...: df
+    ...: asd
+    ...: fas
+    ...: df
+    ...: asd
+    ...: fa
+    ...: sdf
+    ...: asdf"""
+
+In [99]: print(html_content)
+fdsf
+kasdjfkjasdkfjkasdjfjahsdufhawufhausdhfuahsdf
+asdjfhjjasdhf
+asdfasd'fas
+df
+asd
+fas
+df
+asd
+fa
+sdf
+asdf
+
+In [100]: re.match(r".*", html_content).group()
+Out[100]: 'fdsf'
+
+In [101]: re.match(r".*", html_content, re.S).group()
+Out[101]: "fdsf\nkasdjfkjasdkfjkasdjfjahsdufhawufhausdhfuahsdf\nasdjfhjjasdhf\nasdfasd'fas\ndf\nasd\nfas\ndf\nasd\nfa\nsdf\nasdf"
+
+In [102]: re.match(r".*", "a").group()
+Out[102]: 'a'
+
+In [103]: re.match(r".*", "a1").group()
+Out[103]: 'a1'
+
+In [104]: re.match(r".*", "").group()
+Out[104]: ''
+
+In [105]: re.match(r".+", "a").group()
+Out[105]: 'a'
+
+In [106]: re.match(r".+", "ab").group()
+Out[106]: 'ab'
+
+In [107]: re.match(r".+", "abaksdjfkjasdkfjaksdjfkajsdfkjs").group()
+Out[107]: 'abaksdjfkjasdkfjaksdjfkajsdfkjs'
+
+In [108]: re.match(r".+", "").group()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-108-f66770aa2ffe> in <module>()
+----> 1 re.match(r".+", "").group()
+
+AttributeError: 'NoneType' object has no attribute 'group'
